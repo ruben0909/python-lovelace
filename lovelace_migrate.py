@@ -687,7 +687,8 @@ class HomeAssistantAPI(object):
             return self.cache[endpoint]
 
         url = self.api_url + endpoint
-        headers = {'x-ha-access': self.password or '',
+        authvalue = 'Bearer ' + self.password
+        headers = {'Authorization': authvalue or '',
                    'content-type': 'application/json'}
 
         request = requests.get(url, headers=headers)

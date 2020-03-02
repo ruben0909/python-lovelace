@@ -20,6 +20,13 @@ To install without the `requirements.txt` file:
 ```shell
 $ pip3 install "requests>=2.14.2" "pyyaml>=3.11,<4"
 ```
+## Get Long lived token
+1. Access to  https://your.domain.com:port/profile
+2. Go to Long-Lived Access Tokens
+3. Create one with name 'lovelace_migrate.py'
+4. Copy token
+5. Use this as password
+
 
 ### Usage
 ```shell
@@ -90,7 +97,7 @@ $ cat entities.json | python3 lovelace_migrate.py -t Home -
 ##### Using `curl`
 ```shell
 $ curl -sSL -X GET \
-       -H "x-ha-access: YOUR_PASSWORD" \
+       -H "Authorization: Bearer YOUR_Token" \
        -H "content-type: application/json" \
        http://192.168.1.100:8123/api/states \
        | python3 lovelace_migrate.py -
@@ -103,7 +110,7 @@ $ curl -sSL -X GET \
 |-----|------------|------------------|--------------------------------------------------|
 |`-h` |`--help`    |                  |show this help message and exit                   |
 |`-o` |`--output`  |`ui-lovelace.yaml`|write output to `<file>`                          |
-|`-p` |`--password`|Detect/Prompt     |Home Assistant API password                       |
+|`-p` |`--password`|Detect/Prompt     |Home Assistant Long Lived Token                       |
 |`-t` |`--title`   |`Home`            |title of the Lovelace UI                          |
 |     |`--debug`   |                  |set log level to DEBUG                            |
 |     |`--dry-run` |                  |do not write to output file                       |
